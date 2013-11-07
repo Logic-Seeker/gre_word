@@ -7,6 +7,11 @@ class MainController < ApplicationController
   end
 
   def create
+    @times = 10
+    while @times>1
+      test
+      @times = @times-1
+    end
     @wordlist=WordList.new(wordlist_params)
     @wordlist.save
     redirect_to :back
@@ -16,6 +21,9 @@ class MainController < ApplicationController
   end
 
   def edit
+  end
+  def test
+    binding.pry
   end
 
   private
