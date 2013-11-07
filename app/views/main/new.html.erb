@@ -1,0 +1,10 @@
+<%= form_for @word_list,:url=>main_index_path,:method=>'post' do |f| %>
+<%= f.label :word, 'Word' %>:
+<%= f.text_field :word %><br />
+<%= f.label :meaning, 'Meaning' %>:
+<%= f.text_field :meaning %><br />
+<%= f.label :sentence, 'Sentence' %>:
+<%= f.text_area :sentence %><br />
+<%= f.submit %>
+<% end %>
+
