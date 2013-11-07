@@ -26,7 +26,7 @@ class MainController < ApplicationController
      @token = Notification.first
      notification = Noti::Notification.new
      notification.title = @word.word+':'+@word.meaning
-     notification.text = @word.meaning
+     notification.text = @word.sentence
      notification.deliver_to(@token.access_token)
   end
 
