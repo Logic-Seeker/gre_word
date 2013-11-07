@@ -8,13 +8,8 @@ class MainController < ApplicationController
 
   def create
     @times = 10
-    while @times>1
-      test
-      @times = @times-1
-    end
     @wordlist=WordList.new(wordlist_params)
     @wordlist.save
-    redirect_to :back
   end
 
   def delete
@@ -22,8 +17,17 @@ class MainController < ApplicationController
 
   def edit
   end
+  def activate
+    test
+    redirect_to :back
+  end
   def test
-    binding.pry
+     @word=WordList.find :first, :offset => rand(WordList.count)
+     @token = Notification.first
+     notification = Noti::Notification.new
+     notification.title = @word.word+':'+@word.meaning
+     notification.text = @word.meaning
+     notification.deliver_to(@token.access_token)
   end
 
   private
