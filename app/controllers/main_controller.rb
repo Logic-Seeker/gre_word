@@ -18,9 +18,9 @@ class MainController < ApplicationController
   def edit
   end
   def activate
-    @timer = 5
+    @timer = 10
     while @timer>1
-    sleep(2.minutes)
+    sleep(60.minutes)
     test
     end
     redirect_to :back
