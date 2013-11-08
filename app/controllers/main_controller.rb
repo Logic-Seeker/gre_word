@@ -7,7 +7,6 @@ class MainController < ApplicationController
   end
 
   def create
-    @times = 10
     @wordlist=WordList.new(wordlist_params)
     @wordlist.save
   end
@@ -20,18 +19,20 @@ class MainController < ApplicationController
   def activate
     @timer = 10
     while @timer>1
-    sleep(60.minutes)
     test
+    sleep(60.minutes)
     end
     redirect_to :back
   end
   def test
      @word=WordList.find :first, :offset => rand(WordList.count)
-     @token = Notification.first
+     @token = Notification.all
      notification = Noti::Notification.new
      notification.title = @word.word+':'+@word.meaning
      notification.text = @word.sentence
-     notification.deliver_to(@token.access_token)
+      @token.each do |t| 
+     notification.deliver_to(t.access_token)
+      end
   end
 
   private
